@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:th="http://wwww.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+
+<title>Ticket Tracker Application</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous">
+<!-- Place the first <script> tag in your HTML's <head> -->
+<style>
+* {
+	margin: 0px;
+}
+
+nav {
+	background-color: blue;
+	height: 50px;
+}
+
+ul {
+	padding: 10px;
+}
+
+ul li {
+	display: inline;
+	padding: 15px;
+	margin-right: 10px;
+	margin-left: 10px;
+	color: white;
+}
+
+ul li a {
+	text-decoration: none;
+	color: white;
+}
+
+#div1 {
+	border: 2px solid lightgray;
+	margin-left: 450px;
+	margin-right: 450px;
+}
+
+#div2 {
+	border: 2px solid lightgray;
+	background-color: lightgray;
+	text-align: center;
+	margin-left: 50px;
+	margin-right: 50px;
+}
+
+#div3 {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+textarea {
+	width: 100%;
+	height: 300px;
+}
+
+footer {
+    background-color: lightgray;
+    text-align: center;
+    padding: 15px;
+    width: 100%;
+    bottom: 0;
+}
+
+footer p {
+    margin: 0;
+}
+</style>
+<script
+	src="https://cdn.tiny.cloud/1/qtuy33t5ubw21yljpyl25peltrd0rlzev2h3r30akutbd7sv/tinymce/7/tinymce.min.js"
+	referrerpolicy="origin"></script>
+</head>
+<body class="center-container" style="width: 100%">
+	<script>
+  tinymce.init({
+    selector: 'textarea',
+    plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss markdown',
+    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+    tinycomments_mode: 'embedded',
+    tinycomments_author: 'Author name',
+    mergetags_list: [
+      { value: 'First.Name', title: 'First Name' },
+      { value: 'Email', title: 'Email' },
+    ],
+    ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
+  });
+</script>
+	<header style="background-color: light-blue; height: 30px">
+		<nav>
+			<ul>
+				<li>Ticket Tracker Application</li>
+				<li><a href="/allTickets">Tickets</a></li>
+				<li><a href="/ticket/new">New Ticket</a></li>
+			</ul>
+		</nav>
+		<br>
+	</header>
+	<br>
+	<br>
+	<br>
+	<div id="div1">
+		<form th:action="@{/saveTicket}" th:object="${ticketAttribute}"
+			method="POST">
+
+			<div id="div2">
+				<h1>Create Ticket</h1>
+			</div>
+			<div id="div3">
+				<div class="form-group">
+					<label> Ticket name</label> <input type="text" name="ticketTitle"
+						th:field="*{ticketTitle}" class="form-control"
+						placeholder="Enter Ticket Title" />
+
+				</div>
+
+				<div class="form-group">
+					<label> Ticket Description </label> <input type="text"
+						name="description" th:field="*{description}" class="form-control"
+						placeholder="Enter Ticket description" /> <br> 
+					<label>Content</label>
+					<textarea name="editor" th:field="*{content}"></textarea>
+				</div>
+				<br>
+				<button type="submit" class="btn btn-primary">Submit</button>
+				
+			</div>
+			<br>
+		</form>
+	</div>
+	<br>
+	<footer>
+		<p>
+			<strong>Copyright &copy; 2023 GreatLearning All Rights
+				Reserved</strong>
+		</p>
+	</footer>
+</body>
+</html>
